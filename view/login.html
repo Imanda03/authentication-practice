@@ -19,13 +19,13 @@
     <a href="">Forget password?</a><br/>
     <a href="/view/register.html">Create new</a>
     </form>
-    <script>
+    <!-- <script>
         const form = document.getElementById('form');
         form.addEventListener('submit', registerUser);
         async function registerUser(event) {
             event.preventDefault();
-            const userName = document.getElementById('user');
-            const password = document.getElementById('password');
+            const userName = document.getElementById('user').value;
+            const password = document.getElementById('password').value;
 
             fetch('/api/register',{
                 method: 'POST',
@@ -38,7 +38,7 @@
                 }).then((result) =>result.JSON )
             })
         }
-    </script>
+    </script> -->
     </div>
 </body>
 </html>
