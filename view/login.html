@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>Log In Form</title>
+    <link rel="stylesheet"  href="/public/style.css">
+</head>
+<body>
+    <div class="loginbox">
+    <img src="/public/logo.jpeg" class="avtar">
+    <h1>Login Here</h1>
+
+    <form name="login" action="" id="form" method="POST"> 
+        <input type="text" autocomplete="off" id="user" placeholder="Enter Uername">
+        <p>Username</p>
+
+    <input type="password" id="password" name="" placeholder="Enter Password">
+    <p>Password</p>
+
+    <input type="submit" name="" value="Log In">
+    <a href="">Forget password?</a><br/>
+    <a href="/view/register.html">Create new</a>
+    </form>
+    <script>
+        const form = document.getElementById('form');
+        form.addEventListener('submit', registerUser);
+        async function registerUser(event) {
+            event.preventDefault();
+            const userName = document.getElementById('user');
+            const password = document.getElementById('password');
+
+            fetch('/api/register',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify ({
+                    userName,
+                    password
+                }).then((result) =>result.JSON )
+            })
+        }
+    </script>
+    </div>
+</body>
+</html>
