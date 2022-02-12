@@ -3,10 +3,10 @@ const authController = require('../controller/authController')
 
 const router = Router();
 
-router.get('/register',authController.register_get);
-router.post('/register',authController.register_post);
-router.get('/logIn',authController.logIn_get);
-router.post('/logIn',authController.logIn_post);
+router.get('/signup',authController.signup_get);
+router.post('/signip',authController.signup_post);
+router.get('/login',authController.login_get);
+router.post('/login',authController.login_post);
 
 
 
