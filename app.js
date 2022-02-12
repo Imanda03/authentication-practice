@@ -19,7 +19,7 @@ app.set('view engine','ejs');
 const dburl = ("mongodb+srv://project:imanda123@cluster0.ogiuh.mongodb.net/node-auth");
 mongoose.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true})
 // app.listen(3000);
-.then((result) => app.listen(3000))
+.then((result) => app.listen(3000));
 .catch((error) => console.log(error));
 
 // routes
@@ -43,5 +43,5 @@ app.get('./read-cookies',(req,res){
 const cookies = req.cookies;
 consolr.log(cookies);
 
-res.json(cookies)
+res.json(cookies);
 });
