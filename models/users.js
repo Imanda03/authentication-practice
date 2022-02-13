@@ -3,34 +3,34 @@ const { isEmail } = require('validator');
 const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
-    email:{
-        type : 'String',
-        required : [true,'Please enter an email.'],
-        unique : true,
-        lowerCase : true,
-        validate : [isEmail, 'Please enter the validate eemailnp']
+    email: {
+        type: 'String',
+        required: [true, 'Please enter an email.'],
+        unique: true,
+        lowerCase: true,
+        validate: [isEmail, 'Please enter the validate eemailnp']
     },
     password: {
         type: 'String',
-        required : [true,'Please enter the password'],
+        required: [true, 'Please enter the password'],
         minlength: [6, 'Minimum password length is 6 characters']
     }
 });
 
 //fire a function after doc saved to db
-userSchema.post('save',function (doc, next){
+userSchema.post('save', function (doc, next) {
     console.log('New user is created and saved', doc);
 
     next();
 });
 
 //fire a function before doc saved to db
-userSchema.pre('save', async function (next){
+userSchema.pre('save', async function (next) {
     const salt = await bcrypt.gensalt();
-    this.password = await bcrypt.hash(this.password,salt);
+    this.password = await bcrypt.hash(this.password, salt);
     next();
 })
 
-const User = mongoose.model('user',userSchema);
+const User = mongoose.model('user', userSchema);
 
 module.exports = User;
