@@ -13,16 +13,23 @@
 
     <script>
         const form = document.querySelector('form')
+        const emailError = document.querySelector('.email.error');
+        const passwordError = document.querySelector('.password.error');
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+
+
+            //reset the error
+            emailError.textContent = '';
+            passwordError.textContent = '';
 
             //get the values
             const email = form.email.value;
             const password = form.password.value;
 
             console.log(email, password);
-        })
+        });
 
         try {
             const res = await fetch('/signup', {
@@ -30,6 +37,15 @@
                 body: JSON.stringify({ email, password }),
                 headers: { 'Content-Type': 'application/json' }
             });
+            const data = await res.json();
+            console.log(date);
+            if (data.errors) {
+                emailError.textContent = data.errors.email;
+                passwordError.textContent = data.errors.password;
+            }
+            if (data.user) {
+                location.assign('/')
+            }
         } catch (err) {
             console.log(err);
         }
