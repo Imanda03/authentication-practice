@@ -3,6 +3,7 @@ const mongoose = require('mongoose');               // import the mongoose
 const authRoutes = require('./routes/authRoutes')
 // const expressLayouts = require('express-ejs-layouts');
 const cookieParser = require('cookie-parser');
+const { requireAuth } = require('./middleWare/authMiddleWare');
 
 
 const app = express();              // call express and startm from here
@@ -28,7 +29,7 @@ mongoose.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // routes
 app.get('/', (req, res) => res.render('home'));
-app.get('/', (req, res) => res.render('smoothies'));
+app.get('/', requireAuth, (req, res) => res.render('smoothies'));
 app.use('/auth', authRoutes);
 
  //cookies      --> Only general thing is written here 
