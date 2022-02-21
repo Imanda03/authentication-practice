@@ -33,14 +33,14 @@ userSchema.statics.login = async function (email, password) {
         if (auth) {
             return auth;
         }
-        throw Error("Incorrect Paassword!");
+        throw Error("incorrect password");
     }
-    throw Error("Incorrect email!")
+    throw Error("incorrect email")
 }
 
 //fire a function before doc saved to db
 userSchema.pre('save', async function (next) {
-    const salt = await bcrypt.gensalt();
+    const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
     next();
 })
