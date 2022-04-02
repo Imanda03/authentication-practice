@@ -4,6 +4,7 @@ const authRoutes = require('./routes/authRoutes')
 // const expressLayouts = require('express-ejs-layouts');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleWare/authMiddleWare');
+const accountBookRoutes = require('./routes/accountBookRoutes');
 
 
 const app = express();              // call express and startm from here
@@ -14,7 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 //view engine
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 
 // datebase connection
 // const dburl = ("mongodb+srv://project:imanda123@cluster0.ogiuh.mongodb.net/node-auth");
@@ -28,10 +29,11 @@ mongoose.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true })
     .catch((error) => { console.log(error) });
 
 // routes
-app.get('*', checkUser);       //This mean apply to every routes
-app.get('/', (req, res) => res.render('home'));
-app.get('/', requireAuth, (req, res) => res.render('smoothies'));
+// app.get('*', checkUser);       //This mean apply to every routes
+// app.get('/', (req, res) => res.render('home'));
+// app.get('/', requireAuth, (req, res) => res.render('smoothies'));
 app.use('/auth', authRoutes);
+app.use('/accountBook', requireAuth, accountBookRoutes);
 
  //cookies      --> Only general thing is written here 
 // app.get('/set-cookies', (req, res) => {
