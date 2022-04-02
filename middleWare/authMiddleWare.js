@@ -10,7 +10,8 @@ const requireAuth = (req, res, next) => {
         jwt.verify(token, 'net ninja secret', (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
-                res.redirect('/login');
+                // res.redirect('/login');
+                res.status(401).json('unauthorzed')
             } else {
                 console.log(decodedToken);
                 next();
@@ -18,7 +19,7 @@ const requireAuth = (req, res, next) => {
         })
     }
     else {
-        res.redirect('/login');
+        res.status(401).json('unauthorzed');
     }
 }
 
